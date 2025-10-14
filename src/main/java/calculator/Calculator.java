@@ -15,11 +15,26 @@ public class Calculator {
             return 0;
         }
 
+        int[] numbers = getNumbers(input);
+        return Arrays.stream(numbers).sum();
+    }
+
+    private int[] getNumbers(String input) {
         String seperatorsRegex = inputHandler.getSeparatorsRegex();
+
         return Arrays.stream(input.split(seperatorsRegex))
-                .map(Integer::parseInt)
-                .mapToInt(x -> x)
-                .sum();
+                .mapToInt(x -> {
+                    int number = Integer.parseInt(x);
+                    validate(number);
+                    return number;
+                })
+                .toArray();
+    }
+
+    private void validate(int number) {
+        if (number <= 0) {
+            throw new IllegalArgumentException("더하는 수는 양수여야 합니다.");
+        }
     }
 
 }
