@@ -24,6 +24,22 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void dotTest() {
+        assertSimpleTest(() -> {
+            run("//.\\n1.2.3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void emptySeparatorTest() {
+        assertSimpleTest(() -> {
+            run("//\\n123");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});

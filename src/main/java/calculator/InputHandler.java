@@ -2,6 +2,7 @@ package calculator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class InputHandler {
     public static final List<String> DEFAULT_SEPARATORS = List.of(",", ":");
@@ -62,14 +63,8 @@ public class InputHandler {
     }
 
     private String escape(String input) {
-        return escapePipeline(input);
-    }
-
-    private String escapePipeline(String input) {
-        if (input.equals("|")) {
-            return "[|]";
-        }
-        return input;
+        return Pattern.quote(input);
+        //        return escapePipeline(input);
     }
 
 }
