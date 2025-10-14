@@ -41,7 +41,7 @@ public class Calculator {
 
     private void validate(int number) {
         if (number <= 0) {
-            throw new IllegalArgumentException("더하는 수는 양수여야 합니다.");
+            throw new IllegalArgumentException("더하는 수는 양수여야 합니다. (잘못된 값: %d)".formatted(number));
         }
     }
 
