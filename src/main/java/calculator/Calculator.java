@@ -2,6 +2,9 @@ package calculator;
 
 import java.util.Arrays;
 
+/**
+ * 계산 로직을 담당하는 클래스
+ */
 public class Calculator {
     private final InputHandler inputHandler;
 
@@ -10,21 +13,26 @@ public class Calculator {
         this.inputHandler = inputHandler;
     }
 
-    public int calculate(String input) {
+    /**
+     * 계산 결과를 반환하는 메서드
+     * @param input 입력받은 문자열
+     * @return 합 계산 결과
+     */
+    public int computeSum(String input) {
         if (input.isBlank()) { // 빈 문자 예외 처리
             return 0;
         }
 
-        int[] numbers = getNumbers(input);
+        int[] numbers = getNumbersToAdd(input);
         return Arrays.stream(numbers).sum();
     }
 
-    private int[] getNumbers(String input) {
-        String seperatorsRegex = inputHandler.getSeparatorsRegex();
+    private int[] getNumbersToAdd(String input) {
+        String separatorsRegex = inputHandler.getSeparatorsRegex();
 
-        return Arrays.stream(input.split(seperatorsRegex))
-                .mapToInt(x -> {
-                    int number = Integer.parseInt(x);
+        return Arrays.stream(input.split(separatorsRegex))
+                .mapToInt(str -> {
+                    int number = Integer.parseInt(str);
                     validate(number);
                     return number;
                 })

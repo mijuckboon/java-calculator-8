@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+/**
+ * 입력받은 문자열에서 구분자 처리를 담당하는 클래스
+ */
 public class InputHandler {
     public static final List<String> DEFAULT_SEPARATORS = List.of(",", ":");
     public static final String CUSTOM_SEPARATOR_OPENER = "//";
@@ -41,12 +44,13 @@ public class InputHandler {
         return input;
     }
 
-    boolean hasCustomSeparator(String input) {
+    private boolean hasCustomSeparator(String input) {
         // empty custom separator를 허용하지 않으려면 length 체크 조건 추가
         return input.startsWith(CUSTOM_SEPARATOR_OPENER) && input.contains(CUSTOM_SEPARATOR_CLOSER);
     }
 
-    String getSeparatorsRegex() {
+    // 문자열을 split하기 위한 정규식 반환
+    public String getSeparatorsRegex() {
         StringBuilder regexBuilder = new StringBuilder();
         List<String> separators = new ArrayList<>(DEFAULT_SEPARATORS);
         if (customSeparator != null) {
@@ -59,12 +63,11 @@ public class InputHandler {
             regexBuilder.append("|"); // or
         }
 
-        return regexBuilder.substring(0, regexBuilder.length() - 1);
+        return regexBuilder.substring(0, regexBuilder.length() - 1); // 마지막 "|"는 제외
     }
 
     private String escape(String input) {
         return Pattern.quote(input);
-        //        return escapePipeline(input);
     }
 
 }
