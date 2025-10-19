@@ -52,10 +52,7 @@ public class InputHandler {
     // 문자열을 split하기 위한 정규식 반환
     public String getSeparatorsRegex() {
         final StringBuilder regexBuilder = new StringBuilder();
-        final List<String> separators = new ArrayList<>(DEFAULT_SEPARATORS);
-        if (customSeparator != null) {
-            separators.add(customSeparator);
-        }
+        final List<String> separators = getSeparators();
 
         for (String separator : separators) {
             regexBuilder.append(escape(separator));
@@ -64,6 +61,14 @@ public class InputHandler {
 
         final int lastPipeIndex = regexBuilder.length() - "|".length(); // 마지막 "|"는 제외
         return regexBuilder.substring(0, lastPipeIndex);
+    }
+
+    private List<String> getSeparators() {
+        final List<String> separators = new ArrayList<>(DEFAULT_SEPARATORS);
+        if (customSeparator != null) {
+            separators.add(customSeparator);
+        }
+        return separators;
     }
 
     private String escape(String input) {
