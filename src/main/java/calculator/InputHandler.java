@@ -54,16 +54,16 @@ public class InputHandler {
         final StringBuilder regexBuilder = new StringBuilder();
         final List<String> separators = new ArrayList<>(DEFAULT_SEPARATORS);
         if (customSeparator != null) {
-            final String separatorToAdd = escape(customSeparator);
-            separators.add(separatorToAdd);
+            separators.add(customSeparator);
         }
 
         for (String separator : separators) {
-            regexBuilder.append(separator);
+            regexBuilder.append(escape(separator));
             regexBuilder.append("|"); // or
         }
 
-        return regexBuilder.substring(0, regexBuilder.length() - 1); // 마지막 "|"는 제외
+        final int lastPipeIndex = regexBuilder.length() - "|".length(); // 마지막 "|"는 제외
+        return regexBuilder.substring(0, lastPipeIndex);
     }
 
     private String escape(String input) {
