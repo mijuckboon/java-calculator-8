@@ -23,16 +23,16 @@ public class Calculator {
             return 0;
         }
 
-        int[] numbers = getNumbersToAdd(input);
+        final int[] numbers = getNumbersToAdd(input);
         return Arrays.stream(numbers).sum();
     }
 
     private int[] getNumbersToAdd(String input) {
-        String separatorsRegex = inputHandler.getSeparatorsRegex();
+        final String separatorsRegex = inputHandler.getSeparatorsRegex();
 
         return Arrays.stream(input.split(separatorsRegex))
                 .mapToInt(str -> {
-                    int number = Integer.parseInt(str);
+                    final int number = Integer.parseInt(str);
                     validate(number);
                     return number;
                 })

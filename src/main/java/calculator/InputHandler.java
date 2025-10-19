@@ -12,8 +12,8 @@ public class InputHandler {
     public static final String CUSTOM_SEPARATOR_OPENER = "//";
     public static final String CUSTOM_SEPARATOR_CLOSER = "\\n"; // escape code
 
-    private String customSeparator;
-    private String trimmedInput;
+    private final String customSeparator;
+    private final String trimmedInput;
 
     public InputHandler(String input) {
         customSeparator = extractCustomSeparator(input);
@@ -51,10 +51,10 @@ public class InputHandler {
 
     // 문자열을 split하기 위한 정규식 반환
     public String getSeparatorsRegex() {
-        StringBuilder regexBuilder = new StringBuilder();
-        List<String> separators = new ArrayList<>(DEFAULT_SEPARATORS);
+        final StringBuilder regexBuilder = new StringBuilder();
+        final List<String> separators = new ArrayList<>(DEFAULT_SEPARATORS);
         if (customSeparator != null) {
-            String separatorToAdd = escape(customSeparator);
+            final String separatorToAdd = escape(customSeparator);
             separators.add(separatorToAdd);
         }
 
